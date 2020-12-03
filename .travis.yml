@@ -1,2 +1,8 @@
 language: java
+notifications:
+  email:
+    recipients:
+      - przemek19986@gmail.com
+    on_success: never 
+    on_failure: always 
 
