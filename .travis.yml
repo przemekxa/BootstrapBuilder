@@ -3,6 +3,7 @@ notifications:
   email:
     recipients:
       - przemek19986@gmail.com
+      - feliks.czart@student.put.poznan.pl
     on_success: never 
     on_failure: always 
 
