@@ -2,44 +2,61 @@ package pl.put.poznan.bootstrapbuilder.rest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
-import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
-
-import java.util.Arrays;
-
 
 @RestController
-@RequestMapping("/{text}")
 public class BootstrapBuilderController {
 
     private static final Logger logger = LoggerFactory.getLogger(BootstrapBuilderController.class);
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public String get(@PathVariable String text,
-                      @RequestParam(value = "transforms", defaultValue = "upper,escape") String[] transforms) {
+    /**
+     * Default API endpoint for creating webpage templates based on Bootstrap 4 framework
+     *
+     * Example body payload:
+     * <pre>
+     * {
+     *     "header": "static",
+     *     "footer": true,
+     *     "metaType": "twitter",
+     *     "metaTags": {
+     *         "title": "Some title",
+     *         "type": "Some type",
+     *         "description": "Some description",
+     *         "image": "Some image"
+     *     }
+     * }
+     * </pre>
+     *
+     * @param request Request object representing user request
+     * @return Webpage template
+     */
+    @RequestMapping(value = "/template", method = RequestMethod.GET, produces = "application/json")
+    public String get(@RequestBody(required = false) Request request) {
 
         // log the parameters
-        logger.debug(text);
-        logger.debug(Arrays.toString(transforms));
+        logger.debug("GET Template: Header: '{}', Footer: '{}', MetaType: '{}'",
+                (request.getHeader() != null ? request.getHeader() : "NULL"),
+                request.getFooter(),
+                (request.getMetaType() != null ? request.getMetaType() : "NULL")
+        );
 
-        // perform the transformation, you should run your logic here, below is just a silly example
-        BootstrapBuilder transformer = new BootstrapBuilder(transforms);
-        return transformer.transform(text);
+        MetaTags tags = request.getMetaTags();
+        if(tags != null) {
+            logger.debug("\tMeta tags: Title: '{}', Type: '{}', Desc: '{}', Image: '{}'",
+                    (tags.getTitle() != null ? tags.getTitle() : "NULL"),
+                    (tags.getType() != null ? tags.getType() : "NULL"),
+                    (tags.getDescription() != null ? tags.getDescription() : "NULL"),
+                    (tags.getImage() != null ? tags.getImage() : "NULL")
+            );
+        } else {
+            logger.debug("\tMeta tags: NULL");
+        }
+
+        HeaderType h = HeaderType.FIXED;
+
+        // TODO: Implement logic
+
+        return "Unimplemented";
     }
-
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public String post(@PathVariable String text,
-                      @RequestBody String[] transforms) {
-
-        // log the parameters
-        logger.debug(text);
-        logger.debug(Arrays.toString(transforms));
-
-        // perform the transformation, you should run your logic here, below is just a silly example
-        BootstrapBuilder transformer = new BootstrapBuilder(transforms);
-        return transformer.transform(text);
-    }
-
-
 
 }
 
