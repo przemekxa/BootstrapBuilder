@@ -20,7 +20,17 @@ public class CreateBody implements Builder {
         body =
                 "<body>\n" +
                         "<header " + text + ">\n" +
-                        "    <h>Strona główna</h>\n" +
+                        "    <nav>\n" +
+                        "        <div class=\"nav-head\">\n" +
+                        "            Sprint\n" +
+                        "        </div>\n" +
+                        "        <a class=\"nav-link\" href=\"https://github.com/przemekxa/BootstrapBuilder\" target=\"_blank\">\n" +
+                        "            Repozytorium\n" +
+                        "        </a>\n" +
+                        "        <div class=\"nav-link\">\n" +
+                        "            Dokumentacja kodu\n" +
+                        "        </div>\n" +
+                        "    </nav>\n" +
                         "</header>\n" +
                         "<main>\n" +
                         "    <p> jakis opis </p>\n" +

@@ -13,6 +13,7 @@ public class CreateFooter implements Builder {
         String text = "";
         if (request.getFooter()) {
             text = "<footer>\n" +
+                    "    <img class=\"footer__animation\" src=\"http://www.cs.put.poznan.pl/wcomplak/IMG/smash.gif\">\n" +
                     "</footer>\n";
         }
         footer = text +
