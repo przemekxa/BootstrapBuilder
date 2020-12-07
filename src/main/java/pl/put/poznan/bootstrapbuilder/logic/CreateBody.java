@@ -22,7 +22,7 @@ public class CreateBody implements Builder {
                         "<header " + text + ">\n" +
                         "    <nav>\n" +
                         "        <div class=\"nav-head\">\n" +
-                        "            Sprint\n" +
+                        "            <img class=\"logo\" src=\"https://i.ibb.co/4j19Vgg/sprint.png\">\n" +
                         "        </div>\n" +
                         "        <a class=\"nav-link\" href=\"https://github.com/przemekxa/BootstrapBuilder\" target=\"_blank\">\n" +
                         "            Repozytorium\n" +
@@ -34,7 +34,7 @@ public class CreateBody implements Builder {
                         "</header>\n" +
                         "<main>\n" +
                         "    <p> jakis opis </p>\n" +
-                        "</main>\n";
+                        "</main>";
 
     }
 

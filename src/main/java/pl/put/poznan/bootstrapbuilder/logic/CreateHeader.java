@@ -28,7 +28,8 @@ public class CreateHeader implements Builder {
                         "            background: #1b1f23;\n" +
                         "            background-size: 100%;\n" +
                         "        }\n" +
-                        "        nav{\n" +
+                        "\n" +
+                        "        nav {\n" +
                         "            background: #1b1f23;\n" +
                         "            color: #fff;\n" +
                         "            border-top: 1px solid #1b1f23;\n" +
@@ -37,31 +38,39 @@ public class CreateHeader implements Builder {
                         "            z-index: 1000;\n" +
                         "            align-items: center;\n" +
                         "            font-size: 150%;\n" +
-                        "            font-family: Open Sans,sans-serif;\n" +
+                        "            font-family: Open Sans, sans-serif;\n" +
                         "            overflow-x: hidden;\n" +
                         "        }\n" +
-                        "        main{\n" +
+                        "\n" +
+                        "        main {\n" +
                         "            color: #fff;\n" +
                         "        }\n" +
-                        "        .nav-head{\n" +
-                        "            padding-right: 100px;\n" +
+                        "\n" +
+                        "        .nav-head {\n" +
+                        "            padding-right: 80px;\n" +
                         "            display: inline-block;\n" +
                         "        }\n" +
-                        "        .nav-link{\n" +
+                        "\n" +
+                        "        .nav-link {\n" +
                         "            padding-right: 20px;\n" +
                         "            font-size: 100%;\n" +
                         "            align-items: center;\n" +
                         "            display: inline-block;\n" +
                         "            color: #fff;\n" +
                         "        }\n" +
-                        "        footer{\n" +
-                        "            position : absolute;\n" +
-                        "            bottom : 0;\n" +
-                        "            height : 55px;\n" +
+                        "        .logo{\n" +
+                        "            width: 70px;\n" +
+                        "            height: 50px;\n" +
+                        "        }\n" +
+                        "        footer {\n" +
+                        "            position: absolute;\n" +
+                        "            bottom: 0;\n" +
+                        "            height: 55px;\n" +
                         "            width: 100%;\n" +
                         "            background: #000;\n" +
                         "        }\n" +
-                        "        .footer__animation{\n" +
+                        "\n" +
+                        "        .footer__animation {\n" +
                         "            width: 65px;\n" +
                         "            height: 55px;\n" +
                         "            position: relative;\n" +
@@ -72,8 +81,14 @@ public class CreateHeader implements Builder {
                         "        }\n" +
                         "\n" +
                         "        @keyframes ride {\n" +
-                        "            0%   {left:0px; top:0px;}\n" +
-                        "            100% {left:95%; top:0px;}\n" +
+                        "            0% {\n" +
+                        "                left: 0;\n" +
+                        "                top: 0;\n" +
+                        "            }\n" +
+                        "            100% {\n" +
+                        "                left: 95%;\n" +
+                        "                top: 0;\n" +
+                        "            }\n" +
                         "        }\n" +
                         "    </style>\n" +
                         "</head>\n";
