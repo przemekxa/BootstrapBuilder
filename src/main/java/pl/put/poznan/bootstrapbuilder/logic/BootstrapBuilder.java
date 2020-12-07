@@ -1,11 +1,10 @@
 package pl.put.poznan.bootstrapbuilder.logic;
 
 
-import org.springframework.boot.autoconfigure.info.ProjectInfoProperties;
 import pl.put.poznan.bootstrapbuilder.rest.Request;
 
 /**
- * This is just an example to show that the logic should be outside the REST service.
+ * This is Director class in builder pattern.
  */
 public class BootstrapBuilder {
 

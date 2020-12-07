@@ -10,10 +10,10 @@ public class CreateFooter implements Builder {
     public void build(Request request) {
         footer =
                 "   <footer>\n" +
-                "       siema\n" +
-                "   </footer>\n" +
-                "</body>\n" +
-                "</html>";
+                        "       siema\n" +
+                        "   </footer>\n" +
+                        "</body>\n" +
+                        "</html>";
     }
 
     public String getFooter() {

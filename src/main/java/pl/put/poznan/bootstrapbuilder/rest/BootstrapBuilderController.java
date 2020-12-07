@@ -1,7 +1,11 @@
 package pl.put.poznan.bootstrapbuilder.rest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
 
 @RestController
@@ -11,7 +15,7 @@ public class BootstrapBuilderController {
 
     /**
      * Default API endpoint for creating webpage templates based on Bootstrap 4 framework
-     *
+     * <p>
      * Example body payload:
      * <pre>
      * {
@@ -41,7 +45,7 @@ public class BootstrapBuilderController {
         );
 
         MetaTags tags = request.getMetaTags();
-        if(tags != null) {
+        if (tags != null) {
             logger.debug("\tMeta tags: Title: '{}', Type: '{}', Desc: '{}', Image: '{}'",
                     (tags.getTitle() != null ? tags.getTitle() : "NULL"),
                     (tags.getType() != null ? tags.getType() : "NULL"),
