@@ -10,6 +10,40 @@ public class CreateHeader implements Builder {
 
     @Override
     public void build(Request request) {
+
+        String footerStyle = "";
+
+        if (request.getFooter()) {
+            footerStyle = "footer {\n" +
+                    "            position: absolute;\n" +
+                    "            bottom: 0;\n" +
+                    "            height: 55px;\n" +
+                    "            width: 100%;\n" +
+                    "            background: #000;\n" +
+                    "        }\n" +
+                    "\n" +
+                    "        .footer__animation {\n" +
+                    "            width: 65px;\n" +
+                    "            height: 55px;\n" +
+                    "            position: relative;\n" +
+                    "            animation-name: ride;\n" +
+                    "            animation-duration: 60s;\n" +
+                    "            animation-delay: 2s;\n" +
+                    "            animation-iteration-count: infinite;\n" +
+                    "        }\n" +
+                    "\n" +
+                    "        @keyframes ride {\n" +
+                    "            0% {\n" +
+                    "                left: 0;\n" +
+                    "                top: 0;\n" +
+                    "            }\n" +
+                    "            100% {\n" +
+                    "                left: 95%;\n" +
+                    "                top: 0;\n" +
+                    "            }\n" +
+                    "        }";
+        }
+
         header =
                 "<!DOCTYPE html>\n" +
                         "<html lang=\"en\">\n" +
@@ -62,34 +96,7 @@ public class CreateHeader implements Builder {
                         "            width: 70px;\n" +
                         "            height: 50px;\n" +
                         "        }\n" +
-                        "        footer {\n" +
-                        "            position: absolute;\n" +
-                        "            bottom: 0;\n" +
-                        "            height: 55px;\n" +
-                        "            width: 100%;\n" +
-                        "            background: #000;\n" +
-                        "        }\n" +
-                        "\n" +
-                        "        .footer__animation {\n" +
-                        "            width: 65px;\n" +
-                        "            height: 55px;\n" +
-                        "            position: relative;\n" +
-                        "            animation-name: ride;\n" +
-                        "            animation-duration: 60s;\n" +
-                        "            animation-delay: 2s;\n" +
-                        "            animation-iteration-count: infinite;\n" +
-                        "        }\n" +
-                        "\n" +
-                        "        @keyframes ride {\n" +
-                        "            0% {\n" +
-                        "                left: 0;\n" +
-                        "                top: 0;\n" +
-                        "            }\n" +
-                        "            100% {\n" +
-                        "                left: 95%;\n" +
-                        "                top: 0;\n" +
-                        "            }\n" +
-                        "        }\n" +
+                        footerStyle +
                         "    </style>\n" +
                         "</head>\n";
 
