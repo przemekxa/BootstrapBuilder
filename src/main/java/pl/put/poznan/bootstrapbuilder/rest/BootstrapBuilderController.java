@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
+import pl.put.poznan.bootstrapbuilder.logic.Builder;
 
 @RestController
 public class BootstrapBuilderController {
@@ -58,9 +59,9 @@ public class BootstrapBuilderController {
 
         HeaderType h = HeaderType.FIXED;
 
-        BootstrapBuilder bootstrapBuilder = new BootstrapBuilder(request);
-        bootstrapBuilder.buildTemplate();
-        String template = bootstrapBuilder.getTemplate();
+        Builder bootstrapBuilder = new BootstrapBuilder(request);
+        bootstrapBuilder.build();
+        String template = bootstrapBuilder.getResult();
 
         return template;
     }
