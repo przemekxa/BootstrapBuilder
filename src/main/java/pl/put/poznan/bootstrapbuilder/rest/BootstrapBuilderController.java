@@ -61,9 +61,6 @@ public class BootstrapBuilderController {
                 .setFooter(request.getFooter())
                 .build();
 
-
-        template.trim();
-
         return template;
     }
 }
