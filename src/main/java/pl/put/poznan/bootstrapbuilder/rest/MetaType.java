@@ -5,6 +5,11 @@ package pl.put.poznan.bootstrapbuilder.rest;
  */
 public enum MetaType {
     /**
+     * None META tags
+     */
+    NONE,
+
+    /**
      * Regular META tags
      *
      * ex. description, author

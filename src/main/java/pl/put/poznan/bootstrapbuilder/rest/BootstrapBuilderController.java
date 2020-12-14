@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
-import pl.put.poznan.bootstrapbuilder.logic.Builder;
 
 @RestController
 public class BootstrapBuilderController {
@@ -40,9 +39,9 @@ public class BootstrapBuilderController {
 
         // log the parameters
         logger.debug("GET Template: Header: '{}', Footer: '{}', MetaType: '{}'",
-                (request.getHeader() != null ? request.getHeader() : "NULL"),
+                request.getHeader(),
                 request.getFooter(),
-                (request.getMetaType() != null ? request.getMetaType() : "NULL")
+                request.getMetaType()
         );
 
         MetaTags tags = request.getMetaTags();
@@ -57,11 +56,10 @@ public class BootstrapBuilderController {
             logger.debug("\tMeta tags: NULL");
         }
 
-        HeaderType h = HeaderType.FIXED;
-
-        Builder bootstrapBuilder = new BootstrapBuilder(request);
-        bootstrapBuilder.build();
-        String template = bootstrapBuilder.getResult();
+        String template = new BootstrapBuilder()
+                .setHeader(request.getHeader())
+                .setFooter(request.getFooter())
+                .build();
 
         return template;
     }
