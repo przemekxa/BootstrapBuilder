@@ -5,5 +5,14 @@ notifications:
       - przemek19986@gmail.com
       - feliks.czart@student.put.poznan.pl
     on_success: never 
-    on_failure: always 
+    on_failure: always
 
+before_deploy:
+  - mvn install
+deploy:
+  provider: releases
+  api_key: $API_KEY
+  file: target/ioprojectarchitecture-$TRAVIS_TAG.jar
+  skip_cleanup: true
+  on:
+    tags: true
