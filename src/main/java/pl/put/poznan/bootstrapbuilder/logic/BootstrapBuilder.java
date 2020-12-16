@@ -202,7 +202,7 @@ public class BootstrapBuilder implements Builder {
             body += "<header " + headerClass + ">\n" +
                     "    <nav>\n" +
                     "        <div class=\"nav-head\">\n" +
-                    "            <img class=\"logo\" src=\"https://i.ibb.co/4j19Vgg/sprint.png\" alt=\"Logo Sprint\">\n" +
+                    "            <img class=\"logo\" src=\"https://scontent.xx.fbcdn.net/v/t1.15752-9/73295358_1829658583844371_4379619284632993792_n.png?_nc_cat=107&ccb=2&_nc_sid=58c789&_nc_ohc=4u_wWZaGxCYAX9lc8zY&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=e5beae40955f8d61ddfae90ef13afbbf&oe=60017C57\" alt=\"Logo Sprint\">\n" +
                     "        </div>\n" +
                     "        <a class=\"nav-link\" href=\"https://github.com/przemekxa/BootstrapBuilder\" target=\"_blank\">\n" +
                     "            Repozytorium\n" +
