@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * This is the Spring Boot runnable class which deals with running the whole application.
- *
- * @version 1.0.0
  */
 @SpringBootApplication(scanBasePackages = {"pl.put.poznan.bootstrapbuilder.rest"})
 public class BootstrapBuilderApplication {
