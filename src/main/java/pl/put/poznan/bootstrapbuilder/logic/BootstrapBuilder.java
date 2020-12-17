@@ -82,6 +82,7 @@ public class BootstrapBuilder implements Builder {
 
         if(footer) {
             footerStyle =
+                    "<style>\n" +
                     "footer {\n" +
                     "    position: absolute;\n" +
                     "    bottom: 0;\n" +
@@ -109,7 +110,8 @@ public class BootstrapBuilder implements Builder {
                     "        left: 95%;\n" +
                     "        top: 0;\n" +
                     "    }\n" +
-                    "}\n";
+                    "}\n" +
+                    "</style>\n";
 
         } else {
             footerStyle = "";
@@ -131,46 +133,7 @@ public class BootstrapBuilder implements Builder {
     private String buildHead() {
 
         // CSS
-        String style =
-                "body {\n" +
-                "    background: #1b1f23;\n" +
-                "    background-size: 100%;\n" +
-                "}\n" +
-                "\n" +
-                "nav {\n" +
-                "    background: #1b1f23;\n" +
-                "    color: #fff;\n" +
-                "    border-top: 1px solid #1b1f23;\n" +
-                "    border-bottom: 1px solid #000;\n" +
-                "    padding: 8px 30px;\n" +
-                "    z-index: 1000;\n" +
-                "    align-items: center;\n" +
-                "    font-size: 150%;\n" +
-                "    font-family: Open Sans, sans-serif;\n" +
-                "    overflow-x: hidden;\n" +
-                "}\n" +
-                "\n" +
-                "main {\n" +
-                "    color: #fff;\n" +
-                "}\n" +
-                "\n" +
-                ".nav-head {\n" +
-                "    padding-right: 80px;\n" +
-                "    display: inline-block;\n" +
-                "}\n" +
-                "\n" +
-                ".nav-link {\n" +
-                "    padding-right: 20px;\n" +
-                "    font-size: 100%;\n" +
-                "    align-items: center;\n" +
-                "    display: inline-block;\n" +
-                "    color: #fff;\n" +
-                "}\n" +
-                ".logo{\n" +
-                "    width: 70px;\n" +
-                "    height: 50px;\n" +
-                "}\n" +
-                footerStyle;
+        String style = footerStyle;
 
         // Add padding (8 spaces) to style
         String stylePadded = Arrays.stream(style.split("\n"))
@@ -184,9 +147,7 @@ public class BootstrapBuilder implements Builder {
                 "    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\"\n" +
                 "          integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">\n" +
                 "    <title>Title</title>\n" +
-                "    <style>\n" +
                 stylePadded +
-                "    </style>\n" +
                 "</head>\n";
     }
 
@@ -201,13 +162,10 @@ public class BootstrapBuilder implements Builder {
         if(hasHeader) {
             body += "<header " + headerClass + ">\n" +
                     "    <nav>\n" +
-                    "        <div class=\"nav-head\">\n" +
-                    "            <img class=\"logo\" src=\"https://scontent.xx.fbcdn.net/v/t1.15752-9/73295358_1829658583844371_4379619284632993792_n.png?_nc_cat=107&ccb=2&_nc_sid=58c789&_nc_ohc=4u_wWZaGxCYAX9lc8zY&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=e5beae40955f8d61ddfae90ef13afbbf&oe=60017C57\" alt=\"Logo Sprint\">\n" +
-                    "        </div>\n" +
-                    "        <a class=\"nav-link\" href=\"https://github.com/przemekxa/BootstrapBuilder\" target=\"_blank\">\n" +
+                    "        <a href=\"https://github.com/przemekxa/BootstrapBuilder\" target=\"_blank\">\n" +
                     "            Repozytorium\n" +
                     "        </a>\n" +
-                    "        <div class=\"nav-link\">\n" +
+                    "        <div>\n" +
                     "            Dokumentacja kodu\n" +
                     "        </div>\n" +
                     "    </nav>\n" +
@@ -215,7 +173,7 @@ public class BootstrapBuilder implements Builder {
         }
 
         body += "<main>\n" +
-                "    <p> Opis </p>\n" +
+                "    <p> Hello </p>\n" +
                 "</main>\n";
 
         if(hasFooter) {
@@ -236,14 +194,15 @@ public class BootstrapBuilder implements Builder {
      * Build the template from parameters set in this builder
      * @return HTML of the template
      */
+    @Override
     public String build() {
 
         logger.debug("Builder: Building template");
 
         // DOCTYPE and <html>
         String htmlStart =
-                "<!DOCTYPE html>\n" +
-                "<html lang=\"en\">\n" +
+                "<!doctype html>\n" +
+                "<html lang=\"en\">" +
                 "\n";
 
         // <head>...</head>
