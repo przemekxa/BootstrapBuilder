@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
 
 /**
- * This is RestController class which takes JSON as a request body and returns html code.
+ * This is RestController class which takes JSON as a request body and returns html code
  */
 @RestController
 public class BootstrapBuilderController {
