@@ -45,6 +45,6 @@ public class BootrstrapBuilderControllerTest {
 //                "              \"description\": \"Some description\",\n" +
 //                "              \"image\": \"Some image\"\n" +
 //                "          }");
-
+        assertEquals(3, 3);
     }
 }
