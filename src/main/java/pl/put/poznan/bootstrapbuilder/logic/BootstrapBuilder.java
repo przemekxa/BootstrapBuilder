@@ -217,5 +217,12 @@ public class BootstrapBuilder implements Builder {
         return htmlStart + head + body + htmlEnd;
     }
 
+    public String getHeaderClass() {
+        return headerClass;
+    }
+
+    public String getFooterStyle() {
+        return footerStyle;
+    }
 }
 
