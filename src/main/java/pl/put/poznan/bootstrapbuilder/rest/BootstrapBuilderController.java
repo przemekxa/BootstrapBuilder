@@ -24,7 +24,7 @@ public class BootstrapBuilderController {
      * {
      *     "header": "static",
      *     "footer": true,
-     *     "metaType": "twitter",
+     *     "metaTypes": ["regular", "openGraph"],
      *     "metaTags": {
      *         "title": "Some title",
      *         "type": "Some type",
@@ -41,10 +41,10 @@ public class BootstrapBuilderController {
     public String getBootstrapTemplate(@RequestBody(required = false) Request request) {
 
         // log the parameters
-        logger.debug("GET Template: Header: '{}', Footer: '{}', MetaType: '{}'",
+        logger.debug("GET Template: Header: '{}', Footer: '{}', MetaTypes: '{}'",
                 request.getHeader(),
                 request.getFooter(),
-                request.getMetaType()
+                request.getMetaTypes()
         );
 
         MetaTags tags = request.getMetaTags();
@@ -59,11 +59,18 @@ public class BootstrapBuilderController {
             logger.debug("\tMeta tags: NULL");
         }
 
-        String template = new BootstrapBuilder()
+        // Create builder, add header and footer
+        BootstrapBuilder template = new BootstrapBuilder()
                 .setHeader(request.getHeader())
-                .setFooter(request.getFooter())
-                .build();
+                .setFooter(request.getFooter());
 
-        return template;
+        // Add meta tags
+        if (request.getMetaTypes() != null && tags != null) {
+            for(MetaType type : request.getMetaTypes()) {
+                template.addMeta(type, tags);
+            }
+        }
+
+        return template.build();
     }
 }

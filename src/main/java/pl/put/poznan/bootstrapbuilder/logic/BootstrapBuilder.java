@@ -3,7 +3,10 @@ package pl.put.poznan.bootstrapbuilder.logic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.put.poznan.bootstrapbuilder.rest.HeaderType;
+import pl.put.poznan.bootstrapbuilder.rest.MetaTags;
+import pl.put.poznan.bootstrapbuilder.rest.MetaType;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -39,6 +42,11 @@ public class BootstrapBuilder implements Builder {
      * Style of the <pre><footer></pre> tag
      */
     private String footerStyle = "";
+
+    /**
+     * Meta tags to be placed in head
+     */
+    private final ArrayList<String> metadata = new ArrayList<String>();
 
 
 
@@ -82,7 +90,6 @@ public class BootstrapBuilder implements Builder {
 
         if(footer) {
             footerStyle =
-                    "<style>\n" +
                     "footer {\n" +
                     "    position: absolute;\n" +
                     "    bottom: 0;\n" +
@@ -110,8 +117,7 @@ public class BootstrapBuilder implements Builder {
                     "        left: 95%;\n" +
                     "        top: 0;\n" +
                     "    }\n" +
-                    "}\n" +
-                    "</style>\n";
+                    "}\n";
 
         } else {
             footerStyle = "";
@@ -120,6 +126,59 @@ public class BootstrapBuilder implements Builder {
         return this;
     }
 
+    /**
+     * Add meta tags to the header section
+     * @param type Type of the tags being added
+     * @param tags Values in the tags
+     * @return The builder
+     */
+    public Builder addMeta(MetaType type, MetaTags tags) {
+
+        logger.debug("Builder: Add metadata of type {}", type);
+
+        switch (type) {
+            case REGULAR:
+                if(tags.getTitle() != null) {
+                    metadata.add("<title>" + tags.getTitle() + "</title>");
+                }
+                if(tags.getDescription() != null) {
+                    metadata.add("<meta name=\"description\" content=\"" + tags.getDescription() + "\"/>");
+                }
+                // Type and Image not supported
+                break;
+            case OPEN_GRAPH:
+                if(tags.getTitle() != null) {
+                    metadata.add("<meta property=\"og:title\" content=\"" + tags.getTitle() + "\" />");
+                }
+                if(tags.getType() != null) {
+                    metadata.add("<meta property=\"og:type\" content=\"" + tags.getType() + "\" />");
+                }
+                if(tags.getDescription() != null) {
+                    metadata.add("<meta property=\"og:description\" content=\"" + tags.getDescription() + "\" />");
+                }
+                if(tags.getImage() != null) {
+                    metadata.add("<meta property=\"og:image\" content=\"" + tags.getImage() + "\" />");
+                }
+                break;
+            case TWITTER:
+                if(tags.getTitle() != null) {
+                    metadata.add("<meta property=\"twitter:title\" content=\"" + tags.getTitle() + "\" />");
+                }
+                if(tags.getType() != null) {
+                    metadata.add("<meta property=\"twitter:card\" content=\"" + tags.getType() + "\" />");
+                }
+                if(tags.getDescription() != null) {
+                    metadata.add("<meta property=\"twitter:description\" content=\"" + tags.getDescription() + "\" />");
+                }
+                if(tags.getImage() != null) {
+                    metadata.add("<meta property=\"twitter:image\" content=\"" + tags.getImage() + "\" />");
+                }
+                break;
+            default:
+                break;
+        }
+        return this;
+    }
 
 
     //
@@ -135,20 +194,32 @@ public class BootstrapBuilder implements Builder {
         // CSS
         String style = footerStyle;
 
-        // Add padding (8 spaces) to style
-        String stylePadded = Arrays.stream(style.split("\n"))
-                .map(s -> "        " + s)
+        // Add padding (4 spaces) to metadata
+        String metadataPadded = metadata.stream()
+                .map(s -> "    " + s)
                 .collect(Collectors.joining("\n"));
 
-        return
+        String head =
                 "<head>\n" +
                 "    <meta charset=\"utf-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n" +
                 "    <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\"\n" +
                 "          integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">\n" +
-                "    <title>Title</title>\n" +
-                stylePadded +
-                "</head>\n";
+                metadataPadded + "\n";
+
+        // If there is a style
+        if(!style.isEmpty()) {
+
+            // Add padding (8 spaces) to style
+            String stylePadded = Arrays.stream(style.split("\n"))
+                    .map(s -> "        " + s)
+                    .collect(Collectors.joining("\n"));
+
+            head += "    <style>\n" + stylePadded + "\n    </style>\n";
+        }
+        head += "</head>\n";
+
+        return head;
     }
 
     /**
@@ -172,7 +243,7 @@ public class BootstrapBuilder implements Builder {
                     "</header>\n";
         }
 
-        body += "<main>\n" +
+        body += "<main class=\"container\">\n" +
                 "    <p> Hello </p>\n" +
                 "</main>\n";
 

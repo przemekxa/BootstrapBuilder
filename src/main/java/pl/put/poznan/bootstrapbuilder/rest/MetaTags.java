@@ -6,6 +6,15 @@ public class MetaTags {
     private String description;
     private String image;
 
+    public MetaTags() { }
+
+    public MetaTags(String title, String type, String description, String image) {
+        this.title = title;
+        this.type = type;
+        this.description = description;
+        this.image = image;
+    }
+
     public String getTitle() {
         return title;
     }

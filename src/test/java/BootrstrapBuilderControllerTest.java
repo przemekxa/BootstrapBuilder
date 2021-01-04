@@ -5,13 +5,19 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.jupiter.api.Test;
+import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
+import pl.put.poznan.bootstrapbuilder.rest.*;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BootrstrapBuilderControllerTest {
 
+    public static BootstrapBuilderController controller = new BootstrapBuilderController();
 
     /**
      * This test checks response from /template
@@ -38,7 +44,7 @@ public class BootrstrapBuilderControllerTest {
 //        Map<String,String> request = new HashMap<>();
 //        request.put("header", "static");
 //        request.put("footer", "true");
-//        request.put("metaType", "twitter");
+//        request.put("metaTypes", ["twitter"]);
 //        request.put("metaTags", " {\n" +
 //                "              \"title\": \"Some title\",\n" +
 //                "              \"type\": \"Some type\",\n" +
@@ -46,5 +52,30 @@ public class BootrstrapBuilderControllerTest {
 //                "              \"image\": \"Some image\"\n" +
 //                "          }");
         assertEquals(3, 3);
+    }
+
+    @Test
+    void getBootstrapTemplateTest1() {
+
+        // Request
+        Request request = new Request(
+                HeaderType.STATIC,
+                true,
+                new HashSet<MetaType>(Arrays.asList(
+                        MetaType.REGULAR,
+                        MetaType.OPEN_GRAPH,
+                        MetaType.TWITTER)),
+                new MetaTags("TITLE", "TYPE", "DESCRIPTION", "IMAGE")
+        );
+
+        String[] pageContents = {
+                "<html", "</html>", "<head>", "</head>", "<body>", "</body>"
+        };
+
+        String response = controller.getBootstrapTemplate(request);
+
+        for(String contents : pageContents) {
+            assertTrue(response.contains(contents), "HTML should contain " + contents);
+        }
     }
 }

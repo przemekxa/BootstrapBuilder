@@ -1,5 +1,8 @@
 package pl.put.poznan.bootstrapbuilder.rest;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * Object representing the body of a GET request
  */
@@ -7,8 +10,17 @@ public class Request {
 
     private HeaderType header;
     private boolean footer;
-    private MetaType metaType;
+    private LinkedHashSet<MetaType> metaTypes;
     private MetaTags metaTags;
+
+    public Request() { }
+
+    public Request(HeaderType header, boolean footer, Set<MetaType> metaTypes, MetaTags metaTags) {
+        this.header = header;
+        this.footer = footer;
+        this.metaTypes = new LinkedHashSet<MetaType>(metaTypes);
+        this.metaTags = metaTags;
+    }
 
     /**
      * @return Requested header type
@@ -60,24 +72,16 @@ public class Request {
     /**
      * @return Requested meta type
      */
-    public MetaType getMetaType() {
-        return metaType == null ? MetaType.NONE : metaType;
-    }
-
-    /**
-     * Set meta type
-     * @param meta Meta type (as String, name should match enum)
-     */
-    public void setMetaType(String meta) {
-        this.metaType =  MetaType.valueOf(meta.trim().toUpperCase());
+    public Set<MetaType> getMetaTypes() {
+        return metaTypes;
     }
 
     /**
      * Set meta type
      * @param meta Meta type
      */
-    public void setMetaType(MetaType meta) {
-        this.metaType = meta;
+    public void setMetaTypes(Set<MetaType> meta) {
+        this.metaTypes = new LinkedHashSet<MetaType>(meta);
     }
 
     /**
