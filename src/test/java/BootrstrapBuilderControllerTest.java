@@ -5,7 +5,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.jupiter.api.Test;
-import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
 import pl.put.poznan.bootstrapbuilder.rest.*;
 
 import java.io.IOException;
@@ -61,7 +60,7 @@ public class BootrstrapBuilderControllerTest {
         Request request = new Request(
                 HeaderType.STATIC,
                 true,
-                new HashSet<MetaType>(Arrays.asList(
+                new HashSet<>(Arrays.asList(
                         MetaType.REGULAR,
                         MetaType.OPEN_GRAPH,
                         MetaType.TWITTER)),
@@ -74,7 +73,7 @@ public class BootrstrapBuilderControllerTest {
 
         String response = controller.getBootstrapTemplate(request);
 
-        for(String contents : pageContents) {
+        for (String contents : pageContents) {
             assertTrue(response.contains(contents), "HTML should contain " + contents);
         }
     }

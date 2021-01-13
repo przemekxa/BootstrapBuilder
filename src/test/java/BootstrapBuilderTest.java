@@ -9,26 +9,36 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BootstrapBuilderTest {
 
     @Test
-    void setHeaderTest() {
-
+    void setHeaderFixedTest() {
         BootstrapBuilder bootstrapBuilder = new BootstrapBuilder();
         bootstrapBuilder.setHeader(HeaderType.FIXED);
         assertEquals("class='position-fixed'", bootstrapBuilder.getHeaderClass());
+    }
 
+    @Test
+    void setHeaderStaticTest() {
+        BootstrapBuilder bootstrapBuilder = new BootstrapBuilder();
         bootstrapBuilder.setHeader(HeaderType.STATIC);
         assertEquals("class='position-static'", bootstrapBuilder.getHeaderClass());
+    }
 
+    @Test
+    void setHeaderNoneTest() {
+        BootstrapBuilder bootstrapBuilder = new BootstrapBuilder();
         bootstrapBuilder.setHeader(HeaderType.NONE);
         assertEquals("", bootstrapBuilder.getHeaderClass());
     }
 
     @Test
-    void setFooterTest() {
-
+    void setFooterTrueTest() {
         BootstrapBuilder bootstrapBuilder = new BootstrapBuilder();
         bootstrapBuilder.setFooter(true);
         assertTrue(bootstrapBuilder.getFooterStyle().length() > 0);
+    }
 
+    @Test
+    void setFooterFalseTest() {
+        BootstrapBuilder bootstrapBuilder = new BootstrapBuilder();
         bootstrapBuilder.setFooter(false);
         assertEquals("", bootstrapBuilder.getFooterStyle());
     }
@@ -53,7 +63,7 @@ public class BootstrapBuilderTest {
 
         // Regular tags
         built = bootstrapBuilder.addMeta(MetaType.REGULAR, tags).build();
-        for(String contents : regularContents) {
+        for (String contents : regularContents) {
             assertTrue(built.contains(contents), "HTML should contain " + contents);
         }
 
@@ -81,7 +91,7 @@ public class BootstrapBuilderTest {
 
         // Open Graph tags
         built = bootstrapBuilder.addMeta(MetaType.OPEN_GRAPH, tags).build();
-        for(String contents : openGraphContents) {
+        for (String contents : openGraphContents) {
             assertTrue(built.contains(contents), "HTML should contain " + contents);
         }
 
@@ -109,7 +119,7 @@ public class BootstrapBuilderTest {
 
         // Twitter tags
         built = bootstrapBuilder.addMeta(MetaType.TWITTER, tags).build();
-        for(String contents : twitterContents) {
+        for (String contents : twitterContents) {
             assertTrue(built.contains(contents), "HTML should contain " + contents);
         }
 
@@ -154,17 +164,16 @@ public class BootstrapBuilderTest {
                 .build();
 
         // Regular + OpenGraph + Twitter tags
-        for(String contents : regularContents) {
+        for (String contents : regularContents) {
             assertTrue(built.contains(contents), "HTML should contain " + contents);
         }
-        for(String contents : openGraphContents) {
+        for (String contents : openGraphContents) {
             assertTrue(built.contains(contents), "HTML should contain " + contents);
         }
-        for(String contents : twitterContents) {
+        for (String contents : twitterContents) {
             assertTrue(built.contains(contents), "HTML should contain " + contents);
         }
     }
-
 
 
     @Test

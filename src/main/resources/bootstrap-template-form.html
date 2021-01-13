@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template Form</title>
+</head>
+<body>
+<form id="formElem">
+    <input type="text" name="firstname" value="Karam">
+    <input type="text" name="lastname" value="Yousef">
+    <div style="width:200px;">
+        <select placeholder="Header" name="header"
+                style="width: 100%; height: 100%; padding-left: 0; background-color: #342E37; border: none; outline: none; color: #FAFFFD; font-size: 28px">
+            <option>none</option>
+            <option>static</option>
+            <option>fixed</option>
+        </select>
+    </div>
+    <input type="submit">
+
+    <div style="width:200px;">
+        <select multiple placeholder="MetaTypes" name="metatypes"
+                style="width: 100%; height: 100%; padding-left: 0; background-color: #342E37; border: none; outline: none; color: #FAFFFD; font-size: 28px">
+            <option>regular</option>
+            <option>open graph</option>
+            <option>twitter</option>
+        </select>
+    </div>
+
+    <h1>Meta Tags</h1>
+
+    <input placeholder="Title" name="title" type="text" autocomplete="off"/>
+    <input placeholder="Type" name="type" type="text" autocomplete="off"/>
+    <input placeholder="Description" name="title" type="text" autocomplete="off"/>
+    <input placeholder="Image" name="image" type="text" autocomplete="off"/>
+
+    <div style="width:200px;">
+        <select placeholder="Footer" name="footer"
+                style="width: 100%; height: 100%; padding-left: 0; background-color: #342E37; border: none; outline: none; color: #FAFFFD; font-size: 28px">
+            <option>yes</option>
+            <option>no</option>
+        </select>
+    </div>
+
+</form>
+<div id="decoded"></div>
+<button id="encode">Encode</button>
+<div id="encoded"></div>
+</body>
+
+<script>
+    encode.onclick = async (e) => {
+        let response = await fetch('http://localhost:8482/encode', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+
+        let text = await response.text(); // read response body as text
+        data = JSON.parse(text);
+        document.querySelector("#encoded").innerHTML = text;
+        //  document.querySelector("#encoded").innerHTML = `First name = ${data.firstname} <br/>
+        //                                                  Last name = ${data.lastname} <br/>
+        //                                                  Age    = ${data.age}`
+    };
+
+    formElem.onsubmit = async (e) => {
+        e.preventDefault();
+        var form = document.querySelector("#formElem");
+        // var form = document.forms[0];
+
+        data = {
+            firstname: form.querySelector('input[name="firstname"]').value,
+            lastname: form.querySelector('input[name="lastname"]').value,
+            age: 5
+        }
+
+        let response = await fetch('http://localhost:8482/decode', {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+
+        let text = await response.text(); // read response body as text
+        document.querySelector("#decoded").innerHTML = text;
+    };
+</script>
+</html>
