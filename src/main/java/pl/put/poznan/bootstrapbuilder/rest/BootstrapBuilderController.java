@@ -66,7 +66,7 @@ public class BootstrapBuilderController {
 
         // Add meta tags
         if (request.getMetaTypes() != null && tags != null) {
-            for(MetaType type : request.getMetaTypes()) {
+            for (MetaType type : request.getMetaTypes()) {
                 template.addMeta(type, tags);
             }
         }
