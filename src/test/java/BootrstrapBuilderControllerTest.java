@@ -77,4 +77,8 @@ public class BootrstrapBuilderControllerTest {
             assertTrue(response.contains(contents), "HTML should contain " + contents);
         }
     }
+
+    @Test
+    void getBootstrapBuilderTest2() {
+    }
 }

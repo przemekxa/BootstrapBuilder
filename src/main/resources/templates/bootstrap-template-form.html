@@ -6,7 +6,8 @@
     <title>Template Form</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
     <title>Title</title>
     <style>
         body {
@@ -138,7 +139,8 @@
             color: #FFFFFF;
         }
 
-        .input-label {}
+        .input-label {
+        }
 
         .check-form {
             width: 100%;
@@ -231,10 +233,10 @@
 
     <h2>Meta Tags</h2>
 
-    <input class="input-style" placeholder="Title" name="title" type="text" autocomplete="off" />
-    <input class="input-style" placeholder="Type" name="type" type="text" autocomplete="off" />
-    <input class="input-style" placeholder="Description" name="title" type="text" autocomplete="off" />
-    <input class="input-style" placeholder="Image" name="image" type="text" autocomplete="off" />
+    <input autocomplete="off" class="input-style" name="title" placeholder="Title" type="text"/>
+    <input autocomplete="off" class="input-style" name="type" placeholder="Type" type="text"/>
+    <input autocomplete="off" class="input-style" name="title" placeholder="Description" type="text"/>
+    <input autocomplete="off" class="input-style" name="image" placeholder="Image" type="text"/>
 
     </form>
     <div id="decoded" class="wrap">
@@ -244,8 +246,11 @@
 <footer>
 </footer>
 </body>
+
+<!--TODO przepisać poniższy kod JSa, żeby konwertował zaznaczone checkboxy do JSONa-->
+
 <script>
-    encode.onclick = async(e) => {
+    encode.onclick = async (e) => {
         let response = await fetch('http://localhost:8482/encode', {
             method: 'GET',
             headers: {
@@ -261,15 +266,15 @@
         //                                                  Age    = ${data.age}`
     };
 
-    formElem.onsubmit = async(e) => {
+    formElem.onsubmit = async (e) => {
         e.preventDefault();
         var form = document.querySelector("#formElem");
         // var form = document.forms[0];
 
         data = {
-            firstname: form.querySelector('input[name="firstname"]').value,
-            lastname: form.querySelector('input[name="lastname"]').value,
-            age: 5
+            header: form.querySelector('input[name="header"]').value,
+            metaTypes: form.querySelector('input[name="metaTypes"]').value,
+            footer: form.querySelector('input[name="footer"]').value
         }
 
         let response = await fetch('http://localhost:8482/decode', {
