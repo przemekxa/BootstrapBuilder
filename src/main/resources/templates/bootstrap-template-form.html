@@ -246,9 +246,6 @@
 <footer>
 </footer>
 </body>
-
-<!--TODO przepisać poniższy kod JSa, żeby konwertował zaznaczone checkboxy do JSONa-->
-
 <script>
     encode.onclick = async (e) => {
         let response = await fetch('http://localhost:8482/encode', {
@@ -272,9 +269,9 @@
         // var form = document.forms[0];
 
         data = {
-            header: form.querySelector('input[name="header"]').value,
-            metaTypes: form.querySelector('input[name="metaTypes"]').value,
-            footer: form.querySelector('input[name="footer"]').value
+            firstname: form.querySelector('input[name="firstname"]').value,
+            lastname: form.querySelector('input[name="lastname"]').value,
+            age: 5
         }
 
         let response = await fetch('http://localhost:8482/decode', {
