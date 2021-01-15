@@ -37,7 +37,7 @@ public class BootstrapBuilderController {
      * @param request Request object representing user request
      * @return Webpage template
      */
-    @RequestMapping(value = "/template", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/template", method = RequestMethod.POST, produces = "application/json")
     public String getBootstrapTemplate(@RequestBody(required = false) Request request) {
 
         // log the parameters

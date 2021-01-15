@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Template Form</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+    <title>Title</title>
+    <style>
+        :root {
+            --header-font: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: #18181B;
+            background-size: 100%;
+        }
+
+        main {
+            width: 1000px;
+            overflow: auto;
+            margin: 10px auto;
+            padding: 80px 20px 55px 20px;
+            color: #18181B;
+        }
+
+        nav {
+            position: absolute;
+            top: 0;
+            height: 55px;
+            width: 100%;
+            background: #9147FF;
+            border-bottom-left-radius: 50%;
+            border-bottom-right-radius: 50%;
+        }
+
+        nav:hover {
+            background-color: #7025DD;
+        }
+
+        h1 {
+            margin-top: 7%;
+            margin-bottom: 10px;
+            color: #FFFFFF;
+            font-family: var(--header-font);
+            text-align: center;
+            font-size: 80px;
+        }
+
+        h1:hover, h2:hover, h3:hover {
+            color: #DDDDDD;
+            cursor: default;
+        }
+
+        h2 {
+            margin-top: 6%;
+            margin-bottom: 15px;
+            color: #FFFFFF;
+            font-family: var(--header-font);
+            text-align: center;
+            font-size: 50px;
+        }
+
+        h3 {
+            margin: 16px 0;
+            color: #FFFFFF;
+            font-family: var(--header-font);
+            text-align: center;
+            font-size: 30px;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            height: 55px;
+            width: 100%;
+            background: #9147FF;
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+        }
+
+        footer:hover {
+            background-color: #7025DD;
+        }
+
+        .elements {
+            width: 100%;
+            display: inline-flex;
+            justify-content: center;
+        }
+
+        .select-style {
+            width: 100%;
+            height: 100%;
+            padding-left: 0;
+            background-color: #FFFFFF;
+            border: none;
+            outline: none;
+            color: #18181B;
+            font-size: 28px;
+        }
+
+        .tags {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            column-gap: 16px;
+        }
+
+        .input-style {
+            width: 100%;
+            height: 50px;
+            padding-left: 16px;
+            margin-right: 1%;
+            margin-left: 1%;
+            background-color: #FFFFFF;
+            border: none;
+            outline: none;
+            color: #18181B;
+            font-size: 28px;
+            border-radius: 30px;
+        }
+
+        .check-label {
+            color: #FFFFFF;
+        }
+
+        form > .top {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        form > .top > div {
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .input-label {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .button {
+            background-color: #9147FF;
+            border: none;
+            color: white;
+            padding: 10px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 25px;
+            margin-top: 25px;
+            justify-content: center;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #7025DD;
+            cursor: pointer;
+        }
+
+        .wrap {
+            text-align: center;
+        }
+
+        .result {
+            width: 100%;
+            box-sizing: border-box;
+            margin: 64px 8px;
+            padding: 16px;
+            border-radius: 30px;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body></body>
+<header class='position-static'>
+    <nav>
+    </nav>
+</header>
+<main>
+
+    <h1>Fill the form</h1>
+
+    <form class="check-form">
+        <div class="top">
+            <div>
+                <h3>Header</h3>
+                <div class="input-label">
+                    <div>
+                        <input type="radio" id="static" name="header" value="static" checked>
+                        <label class="check-label" for="static">static</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="fixed" name="header" value="fixed">
+                        <label class="check-label" for="fixed">fixed</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="none" name="header" value="none">
+                        <label class="check-label" for="none">none</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>MetaTypes</h3>
+                <div class="input-label">
+                    <div>
+                        <input type="checkbox" id="regular" name="metaTypes" value="regular" checked>
+                        <label class="check-label" for="regular">regular</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="open_graph" name="metaTypes" value="openGraph">
+                        <label class="check-label" for="open_graph">open graph</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="twitter" name="metaTypes" value="twitter">
+                        <label class="check-label" for="twitter">twitter</label>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Footer</h3>
+                <div class="input-label">
+                    <div>
+                        <input type="radio" id="yes" name="footer" value="1" checked>
+                        <label class="check-label" for="yes">yes</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="no" name="footer" value="0">
+                        <label class="check-label" for="no">no</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+        <h2>Meta Tags</h2>
+
+        <div class="tags">
+            <input autocomplete="off" class="input-style" name="title" placeholder="Title" type="text"/>
+            <input autocomplete="off" class="input-style" name="type" placeholder="Type" type="text"/>
+            <input autocomplete="off" class="input-style" name="description" placeholder="Description" type="text"/>
+            <input autocomplete="off" class="input-style" name="image" placeholder="Image" type="text"/>
+        </div>
+
+    </form>
+    <div id="decoded" class="wrap">
+        <button class="button" id="encode" onclick="send()">Encode</button>
+    </div>
+
+    <div class="result"><pre></pre></div>
+</main>
+<footer>
+</footer>
+<script>
+    function send() {
+        let formData = new FormData(document.querySelector("form"))
+
+        let data = {
+            header: formData.get("header") || "static",
+            footer: (formData.get("footer") || "1") == "1",
+            metaTypes: formData.getAll("metaTypes"),
+            metaTags: {
+                title: formData.get("title") || "",
+                type: formData.get("type") || "",
+                description: formData.get("description") || "",
+                image: formData.get("image") || ""
+            }
+        }
+
+        fetch(window.location.origin + "/template", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(data => data.text())
+        .then(data => {
+            document.querySelector(".result").children[0].textContent = data
+        })
+        .catch(err => {
+            document.querySelector(".result").children[0].textContent = "Błąd"
+            console.log(err)
+        })
+    }
+</script>
+</body>
+</html>
