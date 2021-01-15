@@ -27,13 +27,14 @@
         }
 
         nav {
-            position: absolute;
+            position: fixed;
             top: 0;
             height: 55px;
             width: 100%;
             background: #9147FF;
             border-bottom-left-radius: 50%;
             border-bottom-right-radius: 50%;
+            display: flex;
         }
 
         nav:hover {
@@ -83,23 +84,6 @@
 
         footer:hover {
             background-color: #7025DD;
-        }
-
-        .elements {
-            width: 100%;
-            display: inline-flex;
-            justify-content: center;
-        }
-
-        .select-style {
-            width: 100%;
-            height: 100%;
-            padding-left: 0;
-            background-color: #FFFFFF;
-            border: none;
-            outline: none;
-            color: #18181B;
-            font-size: 28px;
         }
 
         .tags {
@@ -174,7 +158,23 @@
             margin: 64px 8px;
             padding: 16px;
             border-radius: 30px;
-            background-color: white;
+            background-color: #18181B;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1b1f23;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #9147FF;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7025DD;
         }
     </style>
 </head>
@@ -254,7 +254,7 @@
         <button class="button" id="encode" onclick="send()">Encode</button>
     </div>
 
-    <div class="result"><pre></pre></div>
+    <div class="result"><pre style="color: #ffffff"></pre></div>
 </main>
 <footer>
 </footer>
