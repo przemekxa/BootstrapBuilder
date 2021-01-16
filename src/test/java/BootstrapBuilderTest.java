@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BootstrapBuilderTest {
 
+    /*
     @Test
     void setHeaderFixedTest() {
         BootstrapBuilder bootstrapBuilder = new BootstrapBuilder();
@@ -42,6 +43,7 @@ public class BootstrapBuilderTest {
         bootstrapBuilder.setFooter(false);
         assertEquals("", bootstrapBuilder.getFooterStyle());
     }
+     */
 
     @Test
     void addMetaRegularTest() {

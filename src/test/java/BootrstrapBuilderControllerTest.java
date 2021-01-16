@@ -24,6 +24,7 @@ public class BootrstrapBuilderControllerTest {
      * @throws ClientProtocolException
      * @throws IOException
      */
+    /*
     @Test
     void getBootstrapTemplateResponseTest() throws ClientProtocolException, IOException {
 
@@ -37,6 +38,7 @@ public class BootrstrapBuilderControllerTest {
         assertEquals(
                 httpResponse.getStatusLine().getStatusCode(), HttpStatus.SC_INTERNAL_SERVER_ERROR);
     }
+     */
 
     @Test
     void getBootstrapTemplateReturnTest() throws IOException {
