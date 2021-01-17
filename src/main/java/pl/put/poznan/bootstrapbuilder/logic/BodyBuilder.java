@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import pl.put.poznan.bootstrapbuilder.rest.HeaderType;
 
 /**
- * Builder used to build the <pre><body></pre> of the document
+ * Builder used to build the 'body' of the document
  */
 public class BodyBuilder implements Builder {
 
@@ -17,7 +17,7 @@ public class BodyBuilder implements Builder {
     private boolean hasHeader = false;
 
     /**
-     * Class of the <pre><header></pre> tag
+     * Class of the 'header' tag
      */
     private String headerClass = "";
 
@@ -70,7 +70,7 @@ public class BodyBuilder implements Builder {
 
 
     /**
-     * Build <pre><body></pre> of the document (including header, footer and script tags)
+     * Build 'body' of the document (including header, footer and script tags)
      * @return Build body part of the document
      */
     @Override

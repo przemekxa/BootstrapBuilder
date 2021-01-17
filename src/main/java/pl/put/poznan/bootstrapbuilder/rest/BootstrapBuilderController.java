@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
 
+import java.util.function.Supplier;
+
 /**
  * This is RestController class which takes JSON as a request body and returns html code
  */
@@ -15,6 +17,19 @@ import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
 public class BootstrapBuilderController {
 
     private static final Logger logger = LoggerFactory.getLogger(BootstrapBuilderController.class);
+
+    /**
+     * Supplies a builder to be used as template builder
+     */
+    private Supplier<BootstrapBuilder> makeBuilder = BootstrapBuilder::new;
+
+    /**
+     * Set the builder used by this class
+     * @param makeBuilder Functional interface supplying the builder
+     */
+    public void setMakeBuilder(Supplier<BootstrapBuilder> makeBuilder) {
+        this.makeBuilder = makeBuilder;
+    }
 
     /**
      * Default API endpoint for creating webpage templates based on Bootstrap 4 framework
@@ -60,7 +75,7 @@ public class BootstrapBuilderController {
         }
 
         // Create builder, add header and footer
-        BootstrapBuilder template = new BootstrapBuilder()
+        BootstrapBuilder template = makeBuilder.get()
                 .setHeader(request.getHeader())
                 .setFooter(request.getFooter());
 

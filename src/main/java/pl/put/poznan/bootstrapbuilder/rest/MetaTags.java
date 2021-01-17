@@ -1,5 +1,8 @@
 package pl.put.poznan.bootstrapbuilder.rest;
 
+/**
+ * Object representing the meta tags to be placed in the head of the document
+ */
 public class MetaTags {
     private String title;
     private String type;

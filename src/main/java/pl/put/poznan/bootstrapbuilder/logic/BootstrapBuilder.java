@@ -14,14 +14,33 @@ public class BootstrapBuilder implements Builder {
     private static final Logger logger = LoggerFactory.getLogger(BootstrapBuilder.class);
 
     /**
-     * Builder used to create the <pre><head></pre> of the document
+     * Builder used to create the 'head' of the document
      */
-    private final HeadBuilder headBuilder = new HeadBuilder();
+    private final HeadBuilder headBuilder;
 
     /**
-     * Builder used to create the <pre><body></pre> of the document
+     * Builder used to create the 'body' of the document
      */
-    private final BodyBuilder bodyBuilder = new BodyBuilder();
+    private final BodyBuilder bodyBuilder;
+
+
+    /**
+     * Construct the builder using the default head and body builders
+     */
+    public BootstrapBuilder() {
+        this.headBuilder = new HeadBuilder();
+        this.bodyBuilder = new BodyBuilder();
+    }
+
+    /**
+     * Construct the builder using custom head and body builders
+     * @param headBuilder A builder that will be used to build the head of the document
+     * @param bodyBuilder A builder that will be used to build the body of the document
+     */
+    public BootstrapBuilder(HeadBuilder headBuilder, BodyBuilder bodyBuilder) {
+        this.headBuilder = headBuilder;
+        this.bodyBuilder = bodyBuilder;
+    }
 
 
     //

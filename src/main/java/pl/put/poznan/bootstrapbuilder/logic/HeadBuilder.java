@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * Builder used to build the <pre><head></pre> of the document
+ * Builder used to build the 'head' of the document
  */
 public class HeadBuilder implements Builder {
 
