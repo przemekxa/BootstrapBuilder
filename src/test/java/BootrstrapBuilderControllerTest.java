@@ -5,18 +5,29 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.jupiter.api.Test;
+import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
 import pl.put.poznan.bootstrapbuilder.rest.*;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.function.Supplier;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class BootrstrapBuilderControllerTest {
 
-    public static BootstrapBuilderController controller = new BootstrapBuilderController();
+    private static BootstrapBuilderController controller = new BootstrapBuilderController();
+
+    private static Supplier<BootstrapBuilder> makeDummy(BootstrapBuilder builder) {
+        when(builder.setHeader(any())).thenReturn(builder);
+        when(builder.setFooter(anyBoolean())).thenReturn(builder);
+        when(builder.addMeta(any(), any())).thenReturn(builder);
+        when(builder.build()).thenReturn("DOCUMENT");
+
+        return () -> { return builder; };
+    };
 
     /**
      * This test checks response from /template
@@ -24,6 +35,7 @@ public class BootrstrapBuilderControllerTest {
      * @throws ClientProtocolException
      * @throws IOException
      */
+    /*
     @Test
     void getBootstrapTemplateResponseTest() throws ClientProtocolException, IOException {
 
@@ -37,44 +49,45 @@ public class BootrstrapBuilderControllerTest {
         assertEquals(
                 httpResponse.getStatusLine().getStatusCode(), HttpStatus.SC_INTERNAL_SERVER_ERROR);
     }
+     */
+
 
     @Test
-    void getBootstrapTemplateReturnTest() throws IOException {
-//        Map<String,String> request = new HashMap<>();
-//        request.put("header", "static");
-//        request.put("footer", "true");
-//        request.put("metaTypes", ["twitter"]);
-//        request.put("metaTags", " {\n" +
-//                "              \"title\": \"Some title\",\n" +
-//                "              \"type\": \"Some type\",\n" +
-//                "              \"description\": \"Some description\",\n" +
-//                "              \"image\": \"Some image\"\n" +
-//                "          }");
-        assertEquals(3, 3);
-    }
+    void emptyRequestTest() {
+        BootstrapBuilder mockBuilder = mock(BootstrapBuilder.class);
+        controller.setMakeBuilder(makeDummy(mockBuilder));
 
-    @Test
-    void getBootstrapTemplateTest1() {
-
-        // Request
-        Request request = new Request(
-                HeaderType.STATIC,
-                true,
-                new HashSet<>(Arrays.asList(
-                        MetaType.REGULAR,
-                        MetaType.OPEN_GRAPH,
-                        MetaType.TWITTER)),
-                new MetaTags("TITLE", "TYPE", "DESCRIPTION", "IMAGE")
-        );
-
-        String[] pageContents = {
-                "<html", "</html>", "<head>", "</head>", "<body>", "</body>"
-        };
+        Request request = new Request();
 
         String response = controller.getBootstrapTemplate(request);
 
-        for (String contents : pageContents) {
-            assertTrue(response.contains(contents), "HTML should contain " + contents);
-        }
+        assertEquals("DOCUMENT", response);
+        verify(mockBuilder).setHeader(HeaderType.NONE);
+        verify(mockBuilder).setFooter(false);
+        verify(mockBuilder, never()).addMeta(any(), any());
+        verify(mockBuilder).build();
     }
+
+    @Test
+    void headerTest() {
+
+        for(HeaderType header : HeaderType.values()) {
+            BootstrapBuilder mockBuilder = mock(BootstrapBuilder.class);
+            controller.setMakeBuilder(makeDummy(mockBuilder));
+
+            Request request = new Request();
+            request.setHeader(header);
+
+            String response = controller.getBootstrapTemplate(request);
+
+            assertEquals("DOCUMENT", response);
+            verify(mockBuilder).setHeader(header);
+            verify(mockBuilder).setFooter(false);
+            verify(mockBuilder, never()).addMeta(any(), any());
+            verify(mockBuilder).build();
+        }
+
+    }
+
+    // TODO: Add footer test, meta test...
 }

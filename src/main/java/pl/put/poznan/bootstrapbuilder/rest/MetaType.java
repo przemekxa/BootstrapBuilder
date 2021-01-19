@@ -10,7 +10,7 @@ public enum MetaType {
     /**
      * Regular META tags
      *
-     * ex. title, meta[name=description],
+     * e.g. title, meta[name=description],
      */
     @JsonProperty("regular")
     @JsonAlias("REGULAR")
@@ -19,7 +19,7 @@ public enum MetaType {
     /**
      * Open Graph META tags
      *
-     * ex. og:title, og:type, og:description, og:image
+     * e.g. og:title, og:type, og:description, og:image
      */
     @JsonProperty("openGraph")
     @JsonAlias("OPEN_GRAPH")
@@ -28,7 +28,7 @@ public enum MetaType {
     /**
      * META tags used by Twitter
      *
-     * ex. twitter:title, twitter:card, twitter:description, twitter:image
+     * e.g. twitter:title, twitter:card, twitter:description, twitter:image
      */
     @JsonProperty("twitter")
     @JsonAlias("TWITTER")
