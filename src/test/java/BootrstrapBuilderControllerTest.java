@@ -1,22 +1,29 @@
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import pl.put.poznan.bootstrapbuilder.app.BootstrapBuilderApplication;
 import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
-import pl.put.poznan.bootstrapbuilder.rest.*;
+import pl.put.poznan.bootstrapbuilder.rest.BootstrapBuilderController;
+import pl.put.poznan.bootstrapbuilder.rest.HeaderType;
+import pl.put.poznan.bootstrapbuilder.rest.Request;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.function.Supplier;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@SpringBootTest(classes = BootstrapBuilderApplication.class)
+@AutoConfigureMockMvc
 public class BootrstrapBuilderControllerTest {
+
+    @Autowired
+    private MockMvc mvc;
 
     private static BootstrapBuilderController controller = new BootstrapBuilderController();
 
@@ -26,31 +33,10 @@ public class BootrstrapBuilderControllerTest {
         when(builder.addMeta(any(), any())).thenReturn(builder);
         when(builder.build()).thenReturn("DOCUMENT");
 
-        return () -> { return builder; };
-    };
-
-    /**
-     * This test checks response from /template
-     *
-     * @throws ClientProtocolException
-     * @throws IOException
-     */
-    /*
-    @Test
-    void getBootstrapTemplateResponseTest() throws ClientProtocolException, IOException {
-
-        // Given
-        HttpUriRequest request = new HttpGet("http://localhost:8080/template");
-
-        // When
-        HttpResponse httpResponse = HttpClientBuilder.create().build().execute(request);
-
-        // Then
-        assertEquals(
-                httpResponse.getStatusLine().getStatusCode(), HttpStatus.SC_INTERNAL_SERVER_ERROR);
+        return () -> {
+            return builder;
+        };
     }
-     */
-
 
     @Test
     void emptyRequestTest() {
@@ -71,7 +57,7 @@ public class BootrstrapBuilderControllerTest {
     @Test
     void headerTest() {
 
-        for(HeaderType header : HeaderType.values()) {
+        for (HeaderType header : HeaderType.values()) {
             BootstrapBuilder mockBuilder = mock(BootstrapBuilder.class);
             controller.setMakeBuilder(makeDummy(mockBuilder));
 
@@ -87,6 +73,35 @@ public class BootrstrapBuilderControllerTest {
             verify(mockBuilder).build();
         }
 
+    }
+
+    @Test
+    public void requestFormEndpoint() throws Exception {
+        mvc.perform(
+                MockMvcRequestBuilders
+                        .get("/"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void requestTemplateEndpoint() throws Exception {
+        String json = "{\n" +
+                "          \"header\": \"static\",\n" +
+                "          \"footer\": true,\n" +
+                "          \"metaTypes\": [\"regular\", \"openGraph\"],\n" +
+                "          \"metaTags\": {\n" +
+                "              \"title\": \"Some title\",\n" +
+                "              \"type\": \"Some type\",\n" +
+                "              \"description\": \"Some description\",\n" +
+                "              \"image\": \"Some image\"\n" +
+                "                             }\n" +
+                "      }";
+        mvc.perform(
+                MockMvcRequestBuilders
+                        .post("/template")
+                        .contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isOk());
     }
 
     // TODO: Add footer test, meta test...
