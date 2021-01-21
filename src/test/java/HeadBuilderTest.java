@@ -28,15 +28,34 @@ class HeadBuilderTest {
         assertEquals(expected, result);
     }
 
-    // zostawić go?
     @Test
-    void emptyMockTest() {
+    void headBuilderAddCssMockTest() {
         HeadBuilder mockHB = mock(HeadBuilder.class);
-        makeDummy(mockHB);
+        BootstrapBuilder bootstrapBuilder = new BootstrapBuilder(mockHB, new BodyBuilder());
 
-        String result = mockHB.build();
+        bootstrapBuilder.setFooter(true);
 
-        assertTrue(result.contains("head"));
+        verify(mockHB).addCSS(anyString());
+    }
+
+    @Test
+    void headBuilderAddMetaMockTest() {
+        HeadBuilder mockHB = mock(HeadBuilder.class);
+        BootstrapBuilder bootstrapBuilder = new BootstrapBuilder(mockHB, new BodyBuilder());
+
+        bootstrapBuilder.addMeta(MetaType.REGULAR, new MetaTags());
+
+        verify(mockHB).addMeta(any(), any());
+    }
+
+    @Test
+    void headBuilderBuildMockTest() {
+        HeadBuilder mockHB = mock(HeadBuilder.class);
+        BootstrapBuilder bootstrapBuilder = new BootstrapBuilder(mockHB, new BodyBuilder());
+
+        bootstrapBuilder.build();
+
+        verify(mockHB).build();
     }
 
     @Test

@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(classes = BootstrapBuilderApplication.class)
 @AutoConfigureMockMvc
-public class BootrstrapBuilderControllerTest {
+public class BootstrapBuilderControllerTest {
 
     @Autowired
     private MockMvc mvc;
@@ -142,6 +142,4 @@ public class BootrstrapBuilderControllerTest {
                         .contentType(MediaType.APPLICATION_JSON).content(json))
                 .andExpect(status().isOk());
     }
-
-    // TODO: mock tests...
 }
