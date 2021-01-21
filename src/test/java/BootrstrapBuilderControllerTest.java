@@ -92,21 +92,24 @@ public class BootrstrapBuilderControllerTest {
         verify(mockBuilder).build();
     }
 
-    // Tego testu nie jesteśmy pewni, co do jego sensu
     @Test
     void addMetaTest() {
         for (MetaType type : MetaType.values()) {
             BootstrapBuilder mockBuilder = mock(BootstrapBuilder.class);
             controller.setMakeBuilder(makeDummy(mockBuilder));
 
-            MetaTags metaTags = new MetaTags("title", "type", "descritpion", "image");
+            MetaTags metaTags = new MetaTags("title", "type", "description", "image");
+            Set<MetaType> meta = new HashSet<>();
+            meta.add(type);
 
             Request request = new Request();
             request.setMetaTags(metaTags);
+            request.setMetaTypes(meta);
+
             String response = controller.getBootstrapTemplate(request);
 
             assertEquals("DOCUMENT", response);
-            verify(mockBuilder, never()).addMeta(type, metaTags);
+            verify(mockBuilder).addMeta(type, metaTags);
             verify(mockBuilder).build();
         }
     }
@@ -140,5 +143,5 @@ public class BootrstrapBuilderControllerTest {
                 .andExpect(status().isOk());
     }
 
-    // TODO: Add footer test, meta test...
+    // TODO: mock tests...
 }

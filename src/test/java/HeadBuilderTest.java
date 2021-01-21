@@ -12,6 +12,19 @@ import static org.mockito.Mockito.*;
 
 class HeadBuilderTest {
 
+    private static BootstrapBuilderController controller = new BootstrapBuilderController();
+
+    private BootstrapBuilder bootstrapBuilder = new BootstrapBuilder();
+
+    private static Supplier<HeadBuilder> makeDummy(HeadBuilder headBuilder) {
+        when(headBuilder.addCSS(any())).thenReturn(headBuilder);
+        when(headBuilder.addMeta(any(MetaType.class), any(MetaTags.class))).thenReturn(headBuilder);
+        when(headBuilder.build()).thenReturn("head");
+        return () -> {
+            return headBuilder;
+        };
+    }
+
     @Test
     void emptyTest() {
         String result = new HeadBuilder()
@@ -28,6 +41,7 @@ class HeadBuilderTest {
         assertEquals(expected, result);
     }
 
+    // zostawić go?
     @Test
     void emptyMockTest() {
         HeadBuilder mockHB = mock(HeadBuilder.class);
