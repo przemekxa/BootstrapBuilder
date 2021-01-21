@@ -1,9 +1,14 @@
 import org.junit.jupiter.api.Test;
+import pl.put.poznan.bootstrapbuilder.logic.BodyBuilder;
+import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
 import pl.put.poznan.bootstrapbuilder.logic.HeadBuilder;
-import pl.put.poznan.bootstrapbuilder.rest.MetaTags;
-import pl.put.poznan.bootstrapbuilder.rest.MetaType;
+import pl.put.poznan.bootstrapbuilder.rest.*;
+
+import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
 class HeadBuilderTest {
 
@@ -24,10 +29,40 @@ class HeadBuilderTest {
     }
 
     @Test
+    void headBuilderAddCssMockTest() {
+        HeadBuilder mockHB = mock(HeadBuilder.class);
+        BootstrapBuilder bootstrapBuilder = new BootstrapBuilder(mockHB, new BodyBuilder());
+
+        bootstrapBuilder.setFooter(true);
+
+        verify(mockHB).addCSS(anyString());
+    }
+
+    @Test
+    void headBuilderAddMetaMockTest() {
+        HeadBuilder mockHB = mock(HeadBuilder.class);
+        BootstrapBuilder bootstrapBuilder = new BootstrapBuilder(mockHB, new BodyBuilder());
+
+        bootstrapBuilder.addMeta(MetaType.REGULAR, new MetaTags());
+
+        verify(mockHB).addMeta(any(), any());
+    }
+
+    @Test
+    void headBuilderBuildMockTest() {
+        HeadBuilder mockHB = mock(HeadBuilder.class);
+        BootstrapBuilder bootstrapBuilder = new BootstrapBuilder(mockHB, new BodyBuilder());
+
+        bootstrapBuilder.build();
+
+        verify(mockHB).build();
+    }
+
+    @Test
     void addCSSTest() {
-        String css1 = "h1 { text-align: center }";
+        String css1 = "h1 { text-align: center; }";
         String css2 = ".grid { display: grid; }";
-        String css3 = "input[type=text] { text-decoration: none }";
+        String css3 = "input[type=text] { text-decoration: none; }";
 
         String result = new HeadBuilder()
                 .addCSS(css1)

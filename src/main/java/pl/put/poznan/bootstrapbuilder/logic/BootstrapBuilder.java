@@ -6,6 +6,8 @@ import pl.put.poznan.bootstrapbuilder.rest.HeaderType;
 import pl.put.poznan.bootstrapbuilder.rest.MetaTags;
 import pl.put.poznan.bootstrapbuilder.rest.MetaType;
 
+import java.util.function.Supplier;
+
 /**
  * This is Director class in builder pattern.
  */
@@ -23,7 +25,6 @@ public class BootstrapBuilder implements Builder {
      */
     private final BodyBuilder bodyBuilder;
 
-
     /**
      * Construct the builder using the default head and body builders
      */
@@ -34,6 +35,7 @@ public class BootstrapBuilder implements Builder {
 
     /**
      * Construct the builder using custom head and body builders
+     *
      * @param headBuilder A builder that will be used to build the head of the document
      * @param bodyBuilder A builder that will be used to build the body of the document
      */
@@ -42,13 +44,13 @@ public class BootstrapBuilder implements Builder {
         this.bodyBuilder = bodyBuilder;
     }
 
-
     //
     // Methods used to customize the template
     //
 
     /**
      * Set the header of the template
+     *
      * @param type Type of the header this template should use
      * @return The builder
      */
@@ -63,6 +65,7 @@ public class BootstrapBuilder implements Builder {
 
     /**
      * Set the footer of the template
+     *
      * @param footer Whether this template should include a footer
      * @return The builder
      */
@@ -72,36 +75,36 @@ public class BootstrapBuilder implements Builder {
 
         bodyBuilder.setFooter(footer);
 
-        if(footer) {
+        if (footer) {
             headBuilder.addCSS(
                     "footer {\n" +
-                    "    position: absolute;\n" +
-                    "    bottom: 0;\n" +
-                    "    height: 55px;\n" +
-                    "    width: 100%;\n" +
-                    "    background: #000;\n" +
-                    "}\n" +
-                    "\n" +
-                    ".footer__animation {\n" +
-                    "    width: 65px;\n" +
-                    "    height: 55px;\n" +
-                    "    position: relative;\n" +
-                    "    animation-name: ride;\n" +
-                    "    animation-duration: 60s;\n" +
-                    "    animation-delay: 2s;\n" +
-                    "    animation-iteration-count: infinite;\n" +
-                    "}\n" +
-                    "\n" +
-                    "@keyframes ride {\n" +
-                    "    0% {\n" +
-                    "        left: 0;\n" +
-                    "        top: 0;\n" +
-                    "    }\n" +
-                    "    100% {\n" +
-                    "        left: 95%;\n" +
-                    "        top: 0;\n" +
-                    "    }\n" +
-                    "}\n"
+                            "    position: absolute;\n" +
+                            "    bottom: 0;\n" +
+                            "    height: 55px;\n" +
+                            "    width: 100%;\n" +
+                            "    background: #000;\n" +
+                            "}\n" +
+                            "\n" +
+                            ".footer__animation {\n" +
+                            "    width: 65px;\n" +
+                            "    height: 55px;\n" +
+                            "    position: relative;\n" +
+                            "    animation-name: ride;\n" +
+                            "    animation-duration: 60s;\n" +
+                            "    animation-delay: 2s;\n" +
+                            "    animation-iteration-count: infinite;\n" +
+                            "}\n" +
+                            "\n" +
+                            "@keyframes ride {\n" +
+                            "    0% {\n" +
+                            "        left: 0;\n" +
+                            "        top: 0;\n" +
+                            "    }\n" +
+                            "    100% {\n" +
+                            "        left: 95%;\n" +
+                            "        top: 0;\n" +
+                            "    }\n" +
+                            "}\n"
             );
 
         }
@@ -111,6 +114,7 @@ public class BootstrapBuilder implements Builder {
 
     /**
      * Add meta tags to the header section
+     *
      * @param type Type of the tags being added
      * @param tags Values in the tags
      * @return The builder
@@ -131,6 +135,7 @@ public class BootstrapBuilder implements Builder {
 
     /**
      * Build the template from parameters set in this builder
+     *
      * @return HTML of the template
      */
     @Override
@@ -141,8 +146,8 @@ public class BootstrapBuilder implements Builder {
         // DOCTYPE and <html>
         String htmlStart =
                 "<!doctype html>\n" +
-                "<html lang=\"en\">" +
-                "\n";
+                        "<html lang=\"en\">" +
+                        "\n";
 
         // <head>...</head>
         String head = headBuilder.build();
