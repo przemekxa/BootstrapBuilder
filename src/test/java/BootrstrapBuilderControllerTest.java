@@ -7,9 +7,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import pl.put.poznan.bootstrapbuilder.app.BootstrapBuilderApplication;
 import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
-import pl.put.poznan.bootstrapbuilder.rest.BootstrapBuilderController;
-import pl.put.poznan.bootstrapbuilder.rest.HeaderType;
-import pl.put.poznan.bootstrapbuilder.rest.Request;
+import pl.put.poznan.bootstrapbuilder.rest.*;
 
 import java.util.function.Supplier;
 

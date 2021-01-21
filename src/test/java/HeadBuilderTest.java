@@ -1,9 +1,14 @@
 import org.junit.jupiter.api.Test;
+import pl.put.poznan.bootstrapbuilder.logic.BodyBuilder;
+import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
 import pl.put.poznan.bootstrapbuilder.logic.HeadBuilder;
-import pl.put.poznan.bootstrapbuilder.rest.MetaTags;
-import pl.put.poznan.bootstrapbuilder.rest.MetaType;
+import pl.put.poznan.bootstrapbuilder.rest.*;
+
+import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
 class HeadBuilderTest {
 
@@ -24,10 +29,20 @@ class HeadBuilderTest {
     }
 
     @Test
+    void emptyMockTest() {
+        HeadBuilder mockHB = mock(HeadBuilder.class);
+        makeDummy(mockHB);
+
+        String result = mockHB.build();
+
+        assertTrue(result.contains("head"));
+    }
+
+    @Test
     void addCSSTest() {
-        String css1 = "h1 { text-align: center }";
+        String css1 = "h1 { text-align: center; }";
         String css2 = ".grid { display: grid; }";
-        String css3 = "input[type=text] { text-decoration: none }";
+        String css3 = "input[type=text] { text-decoration: none; }";
 
         String result = new HeadBuilder()
                 .addCSS(css1)
