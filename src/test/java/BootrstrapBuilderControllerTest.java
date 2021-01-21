@@ -9,6 +9,10 @@ import pl.put.poznan.bootstrapbuilder.app.BootstrapBuilderApplication;
 import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
 import pl.put.poznan.bootstrapbuilder.rest.*;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -70,7 +74,41 @@ public class BootrstrapBuilderControllerTest {
             verify(mockBuilder, never()).addMeta(any(), any());
             verify(mockBuilder).build();
         }
+    }
 
+    @Test
+    void addFooterTest() {
+        BootstrapBuilder mockBuilder = mock(BootstrapBuilder.class);
+        controller.setMakeBuilder(makeDummy(mockBuilder));
+
+        Request request = new Request();
+        request.setFooter(true);
+
+
+        String response = controller.getBootstrapTemplate(request);
+
+        assertEquals("DOCUMENT", response);
+        verify(mockBuilder).setFooter(true);
+        verify(mockBuilder).build();
+    }
+
+    // Tego testu nie jesteśmy pewni, co do jego sensu
+    @Test
+    void addMetaTest() {
+        for (MetaType type : MetaType.values()) {
+            BootstrapBuilder mockBuilder = mock(BootstrapBuilder.class);
+            controller.setMakeBuilder(makeDummy(mockBuilder));
+
+            MetaTags metaTags = new MetaTags("title", "type", "descritpion", "image");
+
+            Request request = new Request();
+            request.setMetaTags(metaTags);
+            String response = controller.getBootstrapTemplate(request);
+
+            assertEquals("DOCUMENT", response);
+            verify(mockBuilder, never()).addMeta(type, metaTags);
+            verify(mockBuilder).build();
+        }
     }
 
     @Test
