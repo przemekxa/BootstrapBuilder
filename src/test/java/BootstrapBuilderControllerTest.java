@@ -9,15 +9,14 @@ import pl.put.poznan.bootstrapbuilder.app.BootstrapBuilderApplication;
 import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
 import pl.put.poznan.bootstrapbuilder.rest.*;
 
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = BootstrapBuilderApplication.class)
@@ -27,7 +26,7 @@ public class BootstrapBuilderControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    private static BootstrapBuilderController controller = new BootstrapBuilderController();
+    private static final BootstrapBuilderController controller = new BootstrapBuilderController();
 
     private static Supplier<BootstrapBuilder> makeDummy(BootstrapBuilder builder) {
         when(builder.setHeader(any())).thenReturn(builder);
@@ -84,7 +83,6 @@ public class BootstrapBuilderControllerTest {
         Request request = new Request();
         request.setFooter(true);
 
-
         String response = controller.getBootstrapTemplate(request);
 
         assertEquals("DOCUMENT", response);
@@ -118,9 +116,10 @@ public class BootstrapBuilderControllerTest {
     public void requestFormEndpoint() throws Exception {
         mvc.perform(
                 MockMvcRequestBuilders
-                        .get("/"))
+                        .get("/index.html"))
                 .andDo(print())
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 
     @Test
@@ -140,6 +139,7 @@ public class BootstrapBuilderControllerTest {
                 MockMvcRequestBuilders
                         .post("/template")
                         .contentType(MediaType.APPLICATION_JSON).content(json))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML));
     }
 }

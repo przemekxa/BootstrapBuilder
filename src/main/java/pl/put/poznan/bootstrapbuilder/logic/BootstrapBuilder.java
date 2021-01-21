@@ -6,8 +6,6 @@ import pl.put.poznan.bootstrapbuilder.rest.HeaderType;
 import pl.put.poznan.bootstrapbuilder.rest.MetaTags;
 import pl.put.poznan.bootstrapbuilder.rest.MetaType;
 
-import java.util.function.Supplier;
-
 /**
  * This is Director class in builder pattern.
  */

@@ -1,5 +1,4 @@
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito.*;
 import pl.put.poznan.bootstrapbuilder.logic.BodyBuilder;
 import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
 import pl.put.poznan.bootstrapbuilder.logic.HeadBuilder;
@@ -109,6 +108,26 @@ public class BootstrapBuilderTest {
             verify(mockHead).addMeta(type, tags);
             assertEquals(emptyDocument, result);
         }
+    }
+
+    @Test
+    void addAllTest() {
+        HeadBuilder mockHead = mock(HeadBuilder.class);
+        when(mockHead.build()).thenReturn("<head></head>\n");
+        BodyBuilder mockBody = mock(BodyBuilder.class);
+        when(mockBody.build()).thenReturn("<body></body>\n");
+
+        String result = new BootstrapBuilder(mockHead, mockBody)
+                .setHeader(HeaderType.STATIC)
+                .setFooter(true)
+                .addMeta(MetaType.REGULAR, tags)
+                .build();
+
+        verify(mockBody).setHeader(HeaderType.STATIC);
+        verify(mockBody).setFooter(true);
+        verify(mockHead).addCSS(anyString());
+        verify(mockHead).addMeta(MetaType.REGULAR, tags);
+        assertEquals(emptyDocument, result);
     }
 
 }

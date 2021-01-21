@@ -4,8 +4,6 @@ import pl.put.poznan.bootstrapbuilder.logic.BootstrapBuilder;
 import pl.put.poznan.bootstrapbuilder.logic.HeadBuilder;
 import pl.put.poznan.bootstrapbuilder.rest.*;
 
-import java.util.function.Supplier;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
